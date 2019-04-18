@@ -1,0 +1,10 @@
+2019-04-18 09:44:52 DEBUG App:13 - debug message
+2019-04-18 09:44:52 INFO  App:14 - info message
+2019-04-18 09:44:52 WARN  App:15 - warn message
+2019-04-18 09:44:52 ERROR App:16 - error message
+2019-04-18 09:44:52 FATAL App:17 - fatal message
+2019-04-18 09:53:01 DEBUG App:13 - debug message
+2019-04-18 09:53:02 INFO  App:14 - info message
+2019-04-18 09:53:02 WARN  App:15 - warn message
+2019-04-18 09:53:02 ERROR App:16 - error message
+2019-04-18 09:53:02 FATAL App:17 - fatal message

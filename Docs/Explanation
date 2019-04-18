@@ -1,0 +1,112 @@
+
+                                    ===   LOGLAMA  ===
+
+    Loglama, bir uygulamanin(application) calisma zamanindaki(runtime) durumunu sistematik,
+    kontrol edilebilir, okunabilir sekilde saklama yontemidir. Loglamayi development, debug
+    ve test sureclerinde kullanabiliriz.
+
+        Loglama kavraminda 3 onemli kavrami inceleyecek olursak;
+
+           - Loglama , sistematik olmalidir.
+           - Loglama, kontrol edilebilir olmalidir.
+           - Loglama, bir uygulamanin durumunu aciklamalidir.
+
+                                   ===  SİSTEMATİK YAPI  ===
+
+    Loglama , sistematik bir yaklasim icerisinde olmalidir. Unutmayalim ki amacimiz keyfimize
+    gore bir bilgi uretimi/ciktisi elde etmek degildir. Loglama aktiviteleri icin bir strateji
+    belirlenmeli , loglama islemi icin hangi bilgiler kullanilacak buna karar verilmelidir.
+    Debug islemi icin , uygulamanin gunluk bakimi icin , siste yoneticilerinin uygulamanin/sistemin
+    performasini gozlemlemesi icin veya cok farkli amaclar icin loglama yapilabilir.Bu nedenle
+    loglama stratejimize gore sistematik yapi farkli olabilir.
+
+                                    ===   KONTROL EDİLEBİLİR   ===
+
+    Loglama islemini yapmak icin de tabiki uygulamizda gerekli kodlari yazacagiz. Bu kodlarda
+    uygulamamizdaki diger kodlar icin uygulanan kontrollere tabi olacaktir. Loglama islemi kodlari
+    her kod gibi kotu veya iyi yazilmis olabilir. Loglama islemi icin yazilan kodlar iyi oldugu
+    takdirde uygulamizin kalitesi artacaktir. Kotu yazilmis kodlar performans dusuklugune neden
+    olabilir.
+
+    Ayrica, loglama formatini kontrol edebiliriz. Loglama bilgisi ornegin XML formatina daha uygun
+    olabilir. Farkli bir yapi icin de duz text sekli daha uygun olabilir. Hatta bu loglamayi
+    veritabani uzerinde tutabiliriz. Bununla birlikte loglama yapilacak dizin/lokasyonu da
+    secebiliriz.
+
+                                     ===  UYUGLAMA DURUMU  ===
+
+    Loglama sonucu ortaya cikan/uretilen bilgiler , eger duzgun bir sekilde nelerin log’lanacagi
+    karari verilmemisse kullanissiz , ise yaramaz olabilirler. Bu bilgilerin verimli olmasi icin
+    nelerin ve hangi durumlarin loglanacagi duzgun tespit edilmelidir. Amacimiz sistemin gerekli
+    her durumunu aciklamak/belirmek/loglamak olmalidir.
+
+
+                                      ===  LOGLAMANIM AVANTAJLARI  ===
+
+    Belki ilk dusundugumuzde loglama islemi cok gereksiz durabilir, sonucta bu yapinin kurulmasi
+    icin de sistematik bir yapi kurmak, kod yazmak, kontrol etmek, bakim gibi ek islemler
+    getirecektir. Peki bu ek islemler karsiligini alabilecek miyiz ?
+
+      -> Hizli hata ayiklamak(debug): Bir problemle karsilastigimizda , log kayitlari bize sorunun
+      nereden kaynaklandigini gosterecektir. Iyi yazilmis bir loglama kodu ,sorunun asil kaynaginin
+      nereden ciktigini daha kisa surede bulmamizi saglayacaktir bu da bize debug isleminde vakit
+      kazandiracaktir.
+
+      -> Kolay bakim: Iyi yazilmis loglama yapisi ile uygulamamizin bakimi/devam edilebilirligi
+       kolay olacaktir. Loglama kodlarinin sadece debug icin tutulmadigini biliyoruz. Bu log kayitlari
+       bize sistem hakkinda bilgi verecektir  bu bilgiler isiginda sistem bakimi daha kolay olacaktir.
+
+      -> Gecmis: Loglama bilgileri istenilen bir dizinde , istenilen bir dosya isminde ornegin tarihsel
+      bir ek olarak levent_log_29_12_2013 seklinde tutulabilir. Icerik olarak da farkli formatlara uygun
+      sekilde tutabilecegimizi belirtmistik.Geriye donuk olarak bu loglanan dosyalar tutulur herhangi
+      bir soruna veya farkli bir duruma karsi tutulabilir.
+
+      -> Maliyet ve Zaman kazanci: Iyi yazilmis loglama yapisi ile , hizli hata ayiklama, kolay bakim gibi
+       zaman ve maliyet kazanci saglanabilir.
+
+                                          ===  LOGLAMNIN DEZAVANTAJLARI  ===
+
+      - Kotu tasarlanmis/yazilmis loglama yapisi sistem performasinda dusukluge neden olabilir.
+
+      - Kullanissiz/gereksiz ciktilar ise yaramaz.Kotu cikti/output karisikliga neden olabilir.
+
+      - Loglama islemi uygulamamiza fazladan kod yazilmasini gerektirecektir , bu nedenle
+       yukaridaki 2 maddedeki durumlar soz konusu oldugunda maliyet ve zaman kaybina neden olabilir.
+
+
+                                                 XML KOMUTLARI
+
+     <Console name="Console" target="SYSTEM.OUT">   Log çıktısının console da yazılacağını belirtiyoruz.
+
+     <File> Lopg çıktısının herhangi bir dosyaya yazılacağını belirtiyoruz.
+
+     <RollingFile> File dosyasının Role yaparak loglama yaparız.
+
+     <ParrentLayout pattern="%d{ISO8601}[%t] %-5level %logger{36} -%msg%n" />  Görüntülenecek logun ekran
+     çıktısının nasıl olacağını belirtiyoruz.
+
+     %d{ISO8601} : Log tutulduğu tarih ve zamanı gösterir.
+
+     [%t] :Logumuz hangi metotda çalıştı.
+
+     %-5level :Tutulan log hangi levelde ise onu verir.
+
+     %logger{%36} :Tutulan log hangi classta tutulmuş onu gösterir.
+
+     %msg%n :Tutulan log da bulunan mesajı gösterir.
+
+     (%F:%L) :Tutulan logun hangi clasta kaçıncı satırda olduğunu gösterir.
+
+     <Loggers> : Bu tag içinde istediğimiz bölgelere seviyelere göre <Logger> ekleyerek detaylı log
+     yapmamızı sağlıyor.
+
+     <Root> :Bir pakede yada classa özel <Logger> tagıyla log atamamıssa bu root kök log geçerli olur.
+
+     <AppenderRef ref="Console" />
+
+     <Appenders> nu tag içinde birden fazla ekrana <Console> ve <Parrent> tnaımlayabiliriz.
+     Biz bu <Root> tagın içinde hangi Appender'ı kullanaçağımızı belirtiyoruz.
+
+                                     ====  SEVİYELER  ====
+
+                  ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATTAL < OFF
